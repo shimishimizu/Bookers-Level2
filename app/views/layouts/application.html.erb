@@ -10,6 +10,36 @@
   </head>
 
   <body>
+    <span>Bookers</span>
+    <div id="slidemenu">
+  <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
+    <% if user_signed_in? %>
+      <li class="">
+        <%= link_to 'Home', books_path %>
+      </li>
+      <li class="">
+        <%= link_to "ログアウト", new_user_session_path, method: :delete %>
+      </li>
+      <li class="">
+        <!-- ↓以下のコードは、5章で正しいroutingに書き直します。 -->
+        <%= link_to 'マイページ', "#" %>
+      </li>
+    <% else %>
+      <li class="">
+        <%= link_to "新規登録", books_path %>
+      </li>
+      <li class="">
+        <%= link_to "ログイン", books_path %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
     <%= yield %>
+
+    <footer>
+      <p>CopyRight Infratop.inc</p>
+    </footer>
+
   </body>
 </html>
