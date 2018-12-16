@@ -1,8 +1,8 @@
-<header>
 <div class="container">
 	<div class="row">
 		<div class="col-xs-3">
 			<h2>User info</h2>
+
 
 
             <table>
@@ -34,22 +34,22 @@
 		</div>
 
 		<div class="col-xs-9">
-			<h2>Books</h2>
+			<h2>Users</h2>
             <teble>
 	            <thead>
 		            <tr>
+			            <th>image</th>
+			            <th>name</th>
 			            <th></th>
-			            <th>Title</th>
-			            <th>Opinion</th>
 		            </tr>
 	            </thead>
 
 	            <tbody>
-	                <% @books.each do |book| %>
+	                <% @users.each do |user| %>
 		            <tr>
 			            <td></td>
-			            <td><%= link_to "#{book.title}", "#{book_path(book.id)}" %></td>
-			            <td><%= book.opinion %></td>
+			            <td><%= user.name %></td>
+			            <td><%= link_to "show", user_path(user.id) %> </td>
 		            </tr>
 		            <% end %>
 	            </tbody>
@@ -57,3 +57,4 @@
         </div>
     </div>
 </div>
+
