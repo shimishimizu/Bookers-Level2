@@ -1,41 +1,74 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-3">
+
+			<% if flash[:success] %>
+                <p><%= flash[:success] %></p>
+            <% end %>
+
 			<h2>User info</h2>
 
+            <%= attachment_image_tag @user, :user_image, :fill, 100, 100, fallback: "no_image.jpg" %>
 
+            <table class="table">
+	            <tbody>
+                    <tr>
+			            <th>name</th>
+                        <th><%= @user.name %></th>
+		            </tr>
+                    <tr>
+			            <th>introduction</th>
+                        <th><%= @user.introduction %></th>
+		            </tr>
+		        </tbody>
+	        </table>
+
+            <%= link_to edit_user_path(@user.id), class: "btn btn-default btn-block edit_user_#{@user.id}" do %>
+            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+            <% end %>
 
 			<h2>New book</h2>
 			<%= form_for(@book) do |f| %>
+
+			<div class="form-group ">
 			<label>Title</label>
 			<br>
-			<%= f.text_field :title %>
-			<br>
+			<%= f.text_field :title, :class=>"form-control book_title" %>
+			</div>
+
+			<div class="form-group ">
 			<label>Opinion</label>
 			<br>
-			<%= f.text_area :opinion %>
-			<br>
-			<%= f.submit 'Create Book' %>
+			<%= f.text_area :opinion, :class=>"form-control book_body" %>
+			</div>
+
+			<%= f.submit 'Create Book', :class=>"btn btn-primary btn-block" %>
 			<% end %>
 		</div>
 
 		<div class="col-xs-9">
 			<h2>Book detail</h2>
-            <teble>
+            <table class="table">
 
 	            <tbody>
 		            <tr>
-			            <td></td>
+			            <td>
+			            	<%= link_to user_path(@user.id) do %>
+			            	<%= attachment_image_tag @user, :user_image, :fill, 100, 100, fallback: "no_image.jpg" %>
+			            	<br>
+			            	<%= @user.name %>
+			            	<% end %>
+			            </td>
 			            <td><%= @book_show.title %></td>
 			            <td><%= @book_show.opinion %></td>
 			            <% if @book_show.user == current_user %>
-			                <td><%= link_to "Edit", edit_book_path(@book_show.id) %></td>
-			                <td><%= link_to "Destroy", book_path(@book_show.id), method: :delete, "data-confirm" => "Are you sure?" %></td>
+			                <td><%= link_to "Edit", edit_book_path(@book_show.id), class: "btn btn-success btn-sm edit_book_#{@book_show.id}" %></td>
+			                <td><%= link_to "Destroy", book_path(@book_show.id), method: :delete, "data-confirm" => "Are you sure?", class: "btn btn-danger btn-sm destroy_book_#{@book_show.id}" %></td>
 			            <% end %>
 		            </tr>
 
 	            </tbody>
-            </teble>
+            </table>
         </div>
     </div>
 </div>

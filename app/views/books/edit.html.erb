@@ -1,16 +1,38 @@
-<h2>Editing Book</h2>
-<%= form_for(@book) do |f| %>
-<label>Title</label>
-<br>
-<%= f.text_field :title %>
-<br>
-<label>Opinion</label>
-<br>
-<%= f.text_area :opinion %>
-<br>
-<%= f.submit "Update Book" %>
-<% end %>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3">
+            <h2>Editing Book</h2>
 
-<%= link_to "Show", book_path(@book.id) %>
-|
-<%= link_to "Back", books_path %>
+            <% if @book.errors.any? %>
+                <div id="error_explanation" class="text-danger">
+	                <h2><%= @book.errors.count %> error prohibited this obj from being saved:</h2>
+	                <ul>
+		                <% @book.errors.full_messages.each do |message| %>
+		                <li><%= message %></li>
+		                <% end %>
+	                </ul>
+                </div>
+            <% end %>
+
+            <%= form_for(@book) do |f| %>
+                <div class="form-group">
+                    <label>Title</label>
+                    <br>
+                    <%= f.text_field :title, :class=>"form-control book_title" %>
+                </div>
+                <div class="form-group">
+                    <label>Opinion</label>
+                    <br>
+                    <%= f.text_area :opinion, :class=>"form-control book_body" %>
+                </div>
+                <div class="form-group">
+                <%= f.submit "Update Book", :class=>"btn btn-primary btn-block book_#{@book.id}" %>
+                </div>
+            <% end %>
+
+            <%= link_to "Show", book_path(@book.id), class: "book_#{@book.id}" %>
+            |
+            <%= link_to "Back", books_path, class: "back" %>
+        </div>
+    </div>
+</div>

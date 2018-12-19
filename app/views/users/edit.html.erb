@@ -1,16 +1,33 @@
-<h2>User info</h2>
+<div class="container">
+    <h2>User info</h2>
 
-<%= form_for(@user) do |f| %>
-  <label>Name</label>
-　<%= f.text_field :name %>
-  <br>
-  <label>Image</label>
-  <br>
-　<%= f.file_field :user_image %>
-  <br>
-  <label>Introduction</label>
-  <%= f.text_area :introduction %>
-  <br>
-  <%= f.submit "Update User" %>
-<% end %>
+<% if @user.errors.any? %>
+    <div id="error_explanation" class="text-danger" >
+      <h2><%= @user.errors.count %> error prohibited this obj from being saved:</h2>
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
+    <%= form_for(@user) do |f| %>
+    <div class="form-group">
+        <label>Name</label>
+　      <%= f.text_field :name, class: "name" %>
+    </div>
+
+    <div class="form-group">
+        <label>Image</label>
+　      <%= f.file_field :user_image, class: "user_image" %>
+    </div>
+
+    <div class="form-group">
+        <label>Introduction</label>
+        <%= f.text_area :introduction, class: "introduction" %>
+    </div>
+
+    <%= f.submit "Update User" %>
+    <% end %>
+</div>
