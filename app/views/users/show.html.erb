@@ -1,6 +1,12 @@
 <div class="container">
+	<% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
+
 	<div class="row">
 		<div class="col-xs-3">
+
+
 			<h2>User info</h2>
 
             <%= attachment_image_tag @user, :user_image, :fill, 100, 100, fallback: "no_image.jpg", :size =>'100x100' %>
